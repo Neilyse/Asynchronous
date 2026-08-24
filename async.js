@@ -113,3 +113,43 @@ thenable.then((result) => {
 });
 
 console.log("thenable instanceof Promise:", thenable instanceof Promise);
+
+
+// fetch
+let data= await response.json()
+let people= data.map((u)=>({name:u.name,email:u.emai
+
+
+
+
+}))
+return people;
+
+
+async function (fetchId) {
+  let [user1,todo1]
+
+}
+async function fetchWithRetry(url, retries)
+
+
+
+function getUser(callback) {
+  setTimeout(() => {
+    const user = {
+      name: "Neila",
+      course: "JavaScript"
+    };
+
+    callback(user);
+  }, 2000);
+}
+
+function displayUser(user) {
+  console.log(`Welcome ${user.name}`);
+  console.log(`Course: ${user.course}`);
+}
+
+getUser(displayUser);
+
+console.log("Dashboard is loading...");
