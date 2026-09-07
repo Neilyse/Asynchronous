@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>I AM A STUDENT</h1>
+    <script>
+      async function getData(url) {
+        try {
+          const response = await fetch(url);
+
+          if (!response.ok) {
+            throw new Error(`Failed to fetch: ${response.status}`);
+          }
+
+          const data = await response.json();
+          return data;
+        } catch (error) {
+          console.log(error.message);
+        }
+    }
+    async function main(){
+        const data = await getData('https://dummyjson.com/products')
+        console.log(data)
+    }
+    main()
+    </script>
+  </body>
+</html>

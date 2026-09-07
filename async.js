@@ -153,3 +153,76 @@ function displayUser(user) {
 getUser(displayUser);
 
 console.log("Dashboard is loading...");
+
+// abort controller
+async function timedAbortController(){
+  setTimeout(() => await fetch("https://dummyjson.com/products"))
+}
+
+
+async function timedAbortController(){
+    const cancel = new AbortController();
+    const timerId = setTimeout(()=>cancel.abort(),1000 )
+     if(cancel.signal.aborted === false) { return " it was not aborted"}
+  try{
+        let products =  await fetch("https://dummyjson.com/products",{signal:cancel.signal}).then(r => r.json())
+        return products
+  }
+catch(error)
+  {
+    if(error.name ='Aborterror'){
+      throw new Error ('Request failed')
+    }
+  } finally{
+    clearTimeout(timerId)
+  }
+  
+}
+await timedAbortController()
+
+async function timedAbortController(url){
+  
+    const cancel = new AbortController();
+    const timerId = setTimeout(()=>cancel.abort(),1000)
+  try{
+        let products =  await Promise.all(url.map(x => fetch(url,{signal:cancel.signal}))) 
+       
+        console.log(products)
+        if(products.status === 404) throw new Error('Not found')
+        return await products.json()
+  }
+catch(error)
+  {
+    if(error.name =='AbortError'){
+      throw new Error ('Request timeout')
+    }else{
+      throw error
+    }
+  } finally{
+    clearTimeout(timerId)
+  }
+  
+}
+await timedAbortController(['https://jsonplaceholder.typicode.com/pots',
+                    'https://jsonplaceholder.typicode.com/users',
+                  'https://jsonplaceholder.typicode.com/comments'])
+
+                  async function  cancellation(url){
+  try{
+    let cancel1 = new AbortController()
+   let posts = await fetch('https://jsonplaceholder.typicode.com/posts',{signal}) 
+   if(!post.ok && post.status === 404) throw new Error ('Ooops  failed to fetch')
+    let postsdata = posts.json()
+    let users =  await fetch ('https://jsonplaceholder.typicode.com/users')
+    if(!users.ok && users.status === 404) throw new Error ('Ooops  failed to fetch2')
+    let Usersdata = users.json()
+    
+    let comments = await fetch('https://jsonplaceholder.typicode.com/comments')
+     if(!comments.ok && comments.status === 404) throw new Error ('Ooops  failed to fetch3')
+    let Commentsdata = comments.json()
+  }
+  catch (error){
+    if(error.name === "AbortError") throw new Error('Request failed')
+    
+  }
+}

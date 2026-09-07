@@ -144,4 +144,102 @@ function multiplicationTable(num) {
 console.log(multiplicationTable(3));
 
 
+function makeMeSlow() {
+  const start = Date.now();
+  while (Date.now() - start < 7000) {
+    // Synchronously block the thread for 7 seconds
+  }
+}
+function antiOptimizeAsync(task) {
+  const start = Date.now()
+  const result = task()
+  const end = Date.now()
+  const random = Math.random() * (12000 - 11000) +11000
+  const delay = random - (end-start)
+  return new Promise(resolve =>{
+    setTimeout(()=> resolve(result),delay)
+  })
+}
 
+// alphabetwar
+function alphabetWar(fight)
+{
+const left = { 
+    w : 4,
+    p :3,
+    b : 2,
+    s : 1};
+const right = { 
+    m :4,
+    q :3,
+    d : 2,
+    z :1
+ };
+ 
+
+let leftPower = 0;
+let rightPower = 0;
+for(let letter of fight){
+
+     if (letter in left) {
+     
+    leftPower += left[letter];
+    }
+
+    else if (letter in right) {
+        rightPower += right[letter];
+    
+    }
+}
+ 
+
+switch (true) {
+    case leftPower > rightPower:
+        return "Left side wins!";
+
+    case leftPower < rightPower:
+        return "Right side wins!";
+
+    default:
+        return "Let's fight again!";
+}
+}
+console.log(alphabetWar('bnccvjcf'));
+
+// expanded 
+function expandedForm(num) {
+  let str = num.toString();
+  let result = [];
+  
+  for (let i = 0; i < str.length; i++) {
+    if (str[i] !== '0') {
+      
+      result.push(str[i] + '0'.repeat(str.length-1 - (i)))
+    }
+  }
+  
+  return result.join(' + ');
+}
+
+function expandedForm(num) {
+    let str =num.toString()
+  let results =[];
+  
+  for (let i = 0; i < str.length; i++) {
+    if(str[i] !=='0'){
+        let digit = Number(str[i])
+         results.push(digit * Math.pow(10,str.length-1 -i));
+    }
+  }
+  return results.join(" + ")
+  }
+  console.log(expandedForm(123))
+
+  function neila(arr){
+ return arr.toString().split("");
+
+  }
+  console.log(neila(123))
+  // to count lowercase letters
+
+  
